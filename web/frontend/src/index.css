@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+/* ============================================================
+   Grid Magnifier Background (background-size illusion)
+   ============================================================ */
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
+/* Layer 1: base grid (40px) */
+.grid-base {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(#e2e8f0 1px, transparent 1px),
+    linear-gradient(90deg, #e2e8f0 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Layer 2: larger grid (60px) — background-size difference creates magnifier illusion */
+.grid-magnifier {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(#cbd5e1 1.5px, transparent 1.5px),
+    linear-gradient(90deg, #cbd5e1 1.5px, transparent 1.5px);
+  background-size: 60px 60px;
+  -webkit-mask-image: radial-gradient(
+    circle 120px at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    black 0%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    circle 120px at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    black 0%,
+    transparent 100%
+  );
+}
+
+/* ============================================================
+   3D Tilt Card
+   ============================================================ */
+.tilt-card {
+  transition: transform 0.15s ease-out, box-shadow 0.3s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
