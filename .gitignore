@@ -6,15 +6,19 @@ frontend/.env.local
 frontend/.env.*.local
 
 # Backend
-backend/__pycache__/
-backend/*.pyc
+**/__pycache__/
+**/*.pyc
 backend/venv/
 backend/env/
 backend/.env
+backend/**/.env
 backend/*.log
 backend/uploads/
 backend/temp/
 backend/temp_uploads/
+backend/reports.db
+backend/result.json
+backend/test_paper.pdf
 
 # OS
 .DS_Store
