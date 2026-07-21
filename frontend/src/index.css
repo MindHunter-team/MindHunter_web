@@ -1,0 +1,126 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* ============================================================
+   Grid Magnifier Background (background-size illusion)
+   ============================================================ */
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
+/* Layer 1: base grid (40px) */
+.grid-base {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(#e2e8f0 1px, transparent 1px),
+    linear-gradient(90deg, #e2e8f0 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Layer 2: larger grid (60px) — background-size difference creates magnifier illusion */
+.grid-magnifier {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(#cbd5e1 1.5px, transparent 1.5px),
+    linear-gradient(90deg, #cbd5e1 1.5px, transparent 1.5px);
+  background-size: 60px 60px;
+  -webkit-mask-image: radial-gradient(
+    circle 120px at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    black 0%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    circle 120px at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    black 0%,
+    transparent 100%
+  );
+}
+
+/* ============================================================
+   3D Tilt Card
+   ============================================================ */
+.tilt-card {
+  transition: transform 0.15s ease-out, box-shadow 0.3s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* ============================================================
+   Weight Slider — custom range thumb
+   ============================================================ */
+.weight-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.weight-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid #94a3b8;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  transition: border-color 0.15s ease;
+}
+
+.weight-slider::-webkit-slider-thumb:hover {
+  border-color: #3b82f6;
+}
+
+.weight-slider:disabled::-webkit-slider-thumb {
+  background: #e2e8f0;
+  border-color: #cbd5e1;
+  cursor: not-allowed;
+}
+
+.weight-slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid #94a3b8;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.weight-slider::-moz-range-thumb:hover {
+  border-color: #3b82f6;
+}
+
+.weight-slider:disabled::-moz-range-thumb {
+  background: #e2e8f0;
+  border-color: #cbd5e1;
+  cursor: not-allowed;
+}
+
+/* ============================================================
+   Dev Panel fade-in
+   ============================================================ */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.dev-panel-enter {
+  animation: fadeIn 0.25s ease-out;
+}
+
+/* ============================================================
+   .no-print — utility class for UI elements excluded from export
+   (the PDF export uses a separate hidden DOM, so @media print
+   targeting is not needed.)
+   ============================================================ */
+.no-print {
+  /* Reserved for future use. The current PDF export builds its
+     own clean DOM from Markdown and does not capture the page. */
+}
