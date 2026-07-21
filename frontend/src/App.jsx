@@ -15,11 +15,7 @@ import html2canvas from "html2canvas";
 // ============================================================
 // API Base URL — Vite env var (dev: localhost, prod: Render URL)
 // ============================================================
-const API_BASE = import.meta.env.VITE_API_URL || (
-  window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
-    ? "http://localhost:8000"
-    : window.location.origin
-);
+const API_BASE = "https://musical-space-engine-7vjqp5wvqpvvcwwjv-8000.app.github.dev";
 
 // ============================================================
 // Mock data for demo
