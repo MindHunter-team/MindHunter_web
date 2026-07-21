@@ -23,3 +23,4 @@ backend/test_paper.pdf
 # OS
 .DS_Store
 Thumbs.db
+.idea/
