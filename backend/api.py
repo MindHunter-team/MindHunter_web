@@ -19,6 +19,7 @@ from pathlib import Path
 from fastapi import FastAPI, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse, JSONResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
 # ---------------------------------------------------------------------------
@@ -482,6 +483,8 @@ async def get_report(report_id: str):
 @app.get("/api/health")
 async def health():
     return {"status": "ok"}
+
+app.mount("/", StaticFiles(directory="dist", html=True), name="static")
 
 # ---------------------------------------------------------------------------
 # CLI entry
